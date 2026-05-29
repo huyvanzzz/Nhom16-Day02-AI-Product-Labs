@@ -13,6 +13,14 @@
 | 7 | Workflow | Bệnh nhân Vinmec không biết cần chuẩn bị giấy tờ gì trước khi khám hoặc tái khám | Bệnh nhân, lễ tân | Đến quầy mới phát hiện thiếu giấy tờ, làm tăng thời gian chờ |
 | 8 | Lặp lại / Tốn thời gian | Phụ huynh Vinschool phải theo dõi thông báo, lịch học, bài tập và hoạt động của con từ nhiều nguồn | Phụ huynh, giáo viên | Thông tin nằm rải rác trong app, email, nhóm lớp; dễ bỏ sót thông báo |
 
+## Top 3 chọn để đào sâu
+
+| Rank | Problem | Vì sao chọn | Điều còn chưa chắc |
+|---|---|---|---|
+| 1 | Vinhomes: xử lý phản ánh cư dân | Actor rõ, workflow nhiều bước, có thể cân nhắc Agent | Chưa rõ data ticket thực tế có đủ để tự động hóa đến mức nào |
+| 2 | Vinpearl/VinWonders: gợi ý lịch trình | Dễ thấy pain, dễ làm workflow, impact ở trải nghiệm booking | Có thể bị rộng nếu không khóa scope theo số ngày/ngân sách |
+| 3 | VinFast: hỗ trợ khách mới dùng xe điện | Có pain thật, có thể chuẩn hóa hướng dẫn, impact dài hạn | Rủi ro an toàn cao, cần boundary và nguồn chính thức rất chặt |
+
 ---
 
 # Top 3 Problem Cards — Phân tích chi tiết
@@ -159,6 +167,12 @@ Agent
 
 Bài này có actor rõ, workflow rõ, bottleneck cụ thể và có thể giải thích hợp lý vì sao cần Agent. Hệ thống không chỉ phân loại một lần, mà còn cần hỏi thêm, phân nhánh, theo dõi SLA và mở lại ticket nếu cư dân chưa hài lòng.
 
+## Điều còn chưa chắc
+
+- Chưa biết mức độ đa dạng của phản ánh thực tế có đủ để Agent tự phân loại tốt hay không.
+- Chưa biết ban quản lý có sẵn rule phân loại hay SLA nào đang dùng chưa.
+- Chưa biết cần can thiệp của người thật ở mức nào với case khẩn cấp.
+
 ---
 
 # Problem Card #2 — Vinpearl/VinWonders: Gợi ý lịch trình phù hợp cho khách du lịch
@@ -276,9 +290,11 @@ Workflow
 
 Có thể phát triển thành Agent sau này nếu hệ thống được kết nối với dữ liệu thời gian thực như tình trạng phòng, vé, giá và lịch hoạt động.
 
-## Vì sao chưa chọn làm Card #1
+## Điều còn chưa chắc
 
-Bài này hay, nhưng scope dễ bị rộng thành “AI travel planner”. Nếu muốn làm tốt cần dữ liệu cập nhật về giá, phòng, vé, giờ mở cửa và combo. Vì vậy, trong giai đoạn đầu nên chọn Workflow hơn là Agent.
+- Chưa rõ dữ liệu giá, vé và combo có được cập nhật đủ nhanh để gợi ý chính xác hay không.
+- Chưa rõ nhóm khách nào đau nhất: gia đình, cặp đôi hay khách đi lần đầu.
+- Chưa rõ chỉ cần workflow gợi ý hay có nên cá nhân hóa sâu đến mức agent.
 
 ---
 
@@ -397,9 +413,11 @@ Workflow
 
 Chưa nên chọn Agent ngay vì liên quan đến an toàn kỹ thuật. Giai đoạn đầu nên là Workflow: AI hiểu câu hỏi, tìm nguồn chính thức, tóm tắt hướng dẫn và chuyển kỹ thuật viên khi cần.
 
-## Vì sao chưa chọn làm Card #1
+## Điều còn chưa chắc
 
-Bài này có impact tốt, nhưng rủi ro cao hơn vì liên quan đến kỹ thuật xe, pin, sạc và an toàn. Nếu AI trả lời sai, hậu quả có thể nghiêm trọng hơn. Vì vậy boundary phải rất chặt và cần nguồn chính thức.
+- Chưa biết tài liệu chính thức có đủ chi tiết để AI trích đúng ngữ cảnh hay không.
+- Chưa biết có bao nhiêu câu hỏi lặp lại đủ phổ biến để làm bài toán này đáng ưu tiên.
+- Chưa biết phần nào phải luôn chuyển người thật vì rủi ro an toàn.
 
 ---
 
@@ -410,3 +428,34 @@ Bài này có impact tốt, nhưng rủi ro cao hơn vì liên quan đến kỹ 
 | Vinhomes | Phù hợp nhất nếu muốn chọn Agent vì có nhiều bước phân nhánh, theo dõi và điều phối |
 | Vinpearl/VinWonders | Phù hợp nếu muốn bài thiên về cá nhân hóa, nhưng nên chọn Workflow trước |
 | VinFast | Có impact nhưng rủi ro kỹ thuật/an toàn cao hơn, cần boundary chặt |
+
+## Sử dụng AI
+
+AI được dùng để **gợi ý thêm problem, phản biện ý tưởng và lọc bớt problem quá chung** sau khi tôi tự scan trước. Mục tiêu là để AI mở rộng góc nhìn, không thay tôi chọn problem.
+
+Prompt tôi đã dùng:
+
+```text
+Tôi là người đang làm các dự án trong hệ sinh thái Vinhomes/Vinpearl/VinFast/Vinmec/Vinschool.
+Công việc hoặc bối cảnh hằng ngày của tôi là quan sát vấn đề thật từ trải nghiệm sử dụng sản phẩm/dịch vụ.
+
+Tôi đã có các problem sau:
+1. Cư dân gửi phản ánh nhưng khó biết trạng thái xử lý
+2. Ban quản lý phải đọc, phân loại và chuyển phản ánh thủ công
+3. Phản ánh tự do thường thiếu ảnh, thiếu vị trí hoặc có nhiều vấn đề trong cùng một ticket
+4. Bộ phận xử lý phải cập nhật trạng thái nhiều lần
+5. Khách du lịch khó tự chọn lịch trình phù hợp
+
+
+Hãy gợi ý thêm problem theo 3 lăng kính: lặp lại, tốn thời gian, AI có thể tốt hơn, pain từ người khác.
+Với mỗi gợi ý, hãy nêu actor, workflow sơ bộ và dấu hiệu thật có thể đo được.
+```
+
+**AI gợi ý thêm:** các ý về phản ánh cư dân, lịch trình du lịch và hỗ trợ xe điện theo hướng rõ workflow hơn. Trong đó, phần về phản ánh cư dân và hỗ trợ xe điện là những hướng tôi thấy có cơ sở thật nhất để giữ lại.
+
+**Tôi dùng AI như thế nào:**
+
+- Dùng AI để mở rộng danh sách problem ban đầu.
+- Dùng AI để hỏi ngược xem problem nào đang quá rộng hoặc chưa có dấu hiệu thật.
+- Dùng AI để viết lại problem cho rõ actor, workflow và bottleneck hơn.
+- Không để AI tự chọn top 3 thay tôi; phần chọn cuối vẫn là quyết định của tôi dựa trên trải nghiệm thật.
